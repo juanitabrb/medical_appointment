@@ -1,9 +1,19 @@
-import React from 'react';
-import  {Button, Pressable, StyleSheet,Text,useColorScheme,View} from 'react-native';
+import React, {useState} from 'react';
+import  { Pressable,
+   StyleSheet,
+   Text,
+   useColorScheme,
+   View,
+  Modal} from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-
+import {Form} from './src/components/Form';
 
 const App =() => {
+  const [modalVisible, setModalVisible] = useState(false);
+  console.log(modalVisible);
+  const newUser = () => {
+    console.log('diste click en  crear Nuevo usuario');
+  };
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -16,16 +26,12 @@ const App =() => {
       <Text style={styles.sectionTitle}>App de Quemados{' '}
         <Text style={styles.sectionTitleBold}>UAM</Text>
       </Text>
-      <Pressable onPress={nuevoUsuario}
-       onPressIn={() =>{ 
-        console.log('IN');
-       }}
-       onPressOut={() =>{ 
-        console.log('OUT');
-       }}>
-        <Text>Nueva Cita</Text>
+      <Pressable 
+      onPress= {() => setModalVisible(true)}
+      style={styles.btnNuevoUsuario}>
+        <Text style={styles.btnTxtNuevoUsuario}>Nueva Cita</Text>
       </Pressable>
-     
+      <Form modalVisible={modalVisible}/>
     </View>
   );
 };
